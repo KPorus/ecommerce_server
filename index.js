@@ -83,21 +83,41 @@ async function run() {
     });
 
     // top rated product
-    app.get("/topRate",  async (req, res) => {
+    app.get("/topProduct",  async (req, res) => {
       const query = { category: "topRated" };
       const result = await ProductsCollection.find(query).toArray();
       res.send(result);
     });
+
+     app.get("/hometopProduct", async (req, res) => {
+       const query = { category: "topRated" };
+       const cursor = ProductsCollection.find(query);
+       const result = await cursor.limit(4).toArray();
+       res.send(result);
+     });
     // New product
     app.get("/newProducts",  async (req, res) => {
       const query = { category: "newArrivals" };
       const result = await ProductsCollection.find(query).toArray();
       res.send(result);
     });
+
+     app.get("/homeNewProducts", async (req, res) => {
+       const query = { category: "newArrivals" };
+       const cursor = ProductsCollection.find(query);
+       const result = await cursor.limit(4).toArray();
+       res.send(result);
+     });
     // Best selling product
     app.get("/bestSelling",  async (req, res) => {
       const query = { category: "bestSellers" };
       const result = await ProductsCollection.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/homebestSelling",  async (req, res) => {
+      const query = { category: "bestSellers" };
+      const cursor = ProductsCollection.find(query);
+      const result = await cursor.limit(4).toArray();
       res.send(result);
     });
     // all tasks
